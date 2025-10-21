@@ -1,4 +1,4 @@
-package main
+package bookings
 
 import (
 	"encoding/json"
@@ -278,7 +278,7 @@ func SkyscannerWebhook(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, 200, respBody)
 }
 
-func main() {
+func startApp() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -286,4 +286,8 @@ func main() {
 	http.HandleFunc("/", SkyscannerWebhook)
 	log.Printf("Server running on port %s", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
+
+func init() {
+	startApp()
 }
